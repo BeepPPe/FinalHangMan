@@ -12,5 +12,10 @@ void ShowMenu();
 void HowToPlay();
 void set_color (const int& code );
 
+///simple ai
+std::string getDrawing(int incorrectGuess);
+std::string getNextHangman();
+std::string getNextStandingman();
+
 #endif // __DRAW_H__
 

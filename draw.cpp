@@ -5,6 +5,7 @@
 #include <conio.h>
 #include "utility.h"
 #include "draw.h"
+#include "simpleai.h"
 
 using namespace std;
 
@@ -234,10 +235,14 @@ void ShowMenu() //this is the main menu of the program
 	cout<<" Start Game";
 	set_color(0*16 + 7);
 	cout<<"\n2.";
+	set_color(0*16 + 2);
+	cout<<" Start Game (With AI)";
+	set_color(0*16 + 7);
+	cout<<"\n3.";
     set_color(0*16 + 2);
 	cout<<" How to play";
 	set_color(0*16 + 7);
-	cout<<"\n3.";
+	cout<<"\n4.";
 	set_color(0*16 + 2);
 	cout<<" Exit";
 	set_color(0*16 + 7);
@@ -245,8 +250,9 @@ void ShowMenu() //this is the main menu of the program
 	cin >> choice; //Input function returns input values
 
 	if(choice == '1') Game(); //start game
-	else if(choice == '2') HowToPlay(); //how to play option
-	else if(choice == '3') //exit program
+	else if(choice == '2') GameWithAi();
+	else if(choice == '3') HowToPlay(); //how to play option
+	else if(choice == '4') //exit program
 	{
 		cout<<"\t\tExited succesfully!";
 		_getch();
@@ -264,4 +270,144 @@ void set_color (const int& code ) {
     SetConsoleTextAttribute( color , code );
 }
 
+///simpleai
+string getDrawing(int incorrectGuess)
+{
+    static const string figure[] = {
+        "   -------------    \n"
+        "   |                \n"
+        "   |                \n"
+        "   |                \n"
+        "   |                \n"
+        "   |     \n"
+        " -----   \n",
+        "   -------------    \n"
+        "   |           |    \n"
+        "   |                \n"
+        "   |                \n"
+        "   |                \n"
+        "   |     \n"
+        " -----   \n",
+        "   -------------    \n"
+        "   |           |    \n"
+        "   |           O    \n"
+        "   |                \n"
+        "   |                \n"
+        "   |     \n"
+        " -----   \n",
+        "   -------------    \n"
+        "   |           |    \n"
+        "   |           O    \n"
+        "   |           |    \n"
+        "   |                \n"
+        "   |     \n"
+        " -----   \n",
+        "   -------------    \n"
+        "   |           |    \n"
+        "   |           O    \n"
+        "   |          /|    \n"
+        "   |                \n"
+        "   |     \n"
+        " -----   \n",
+        "   -------------    \n"
+        "   |           |    \n"
+        "   |           O    \n"
+        "   |          /|\\  \n"
+        "   |                \n"
+        "   |     \n"
+        " -----   \n",
+        "   -------------    \n"
+        "   |           |    \n"
+        "   |           O    \n"
+        "   |          /|\\  \n"
+        "   |          /     \n"
+        "   |     \n"
+        " -----   \n",
+        "   -------------    \n"
+        "   |           |    \n"
+        "   |           O    \n"
+        "   |          /|\\  \n"
+        "   |          / \\  \n"
+        "   |     \n"
+        " -----   \n",
+    };
 
+    const int NUMBER_OF_FIGURES = sizeof(figure) / sizeof(string);
+    return figure[incorrectGuess % NUMBER_OF_FIGURES];
+}
+
+string getNextHangman()
+{
+    static string figure[] =  {
+          "   ------------+    \n"
+          "   |          /     \n"
+          "   |         O      \n"
+          "   |        /|\\    \n"
+          "   |        / \\    \n"
+          "   |        \n"
+          " -----      \n" ,
+          "   ------------+     \n"
+          "   |           |     \n"
+          "   |           O     \n"
+          "   |          /|\\   \n"
+          "   |          / \\   \n"
+          "   |        \n"
+          " -----      \n",
+          "   ------------+      \n"
+          "   |            \\    \n"
+          "   |            O     \n"
+          "   |           /|\\   \n"
+          "   |           / \\   \n"
+          "   |      \n"
+          " -----    \n",
+          "   ------------+     \n"
+          "   |           |     \n"
+          "   |           O     \n"
+          "   |          /|\\   \n"
+          "   |          / \\   \n"
+          "   |        \n"
+          " -----      \n",
+    };
+    const int NUMBER_OF_FIGURES = sizeof(figure) / sizeof(string);
+    static int currentFigure = 0;
+    return figure[(currentFigure++) % NUMBER_OF_FIGURES];
+}
+
+string getNextStandingman()
+{
+    static string figure[] = {
+          "     O     \n"
+          "    /|\\   \n"
+          "    | |    \n",
+          "     O     \n"
+          "    /|\\   \n"
+          "    / \\   \n",
+          "   __O__   \n"
+          "     |     \n"
+          "    / \\   \n",
+          "    \\O/   \n"
+          "     |     \n"
+          "    / \\   \n",
+          "   __O__   \n"
+          "     |     \n"
+          "    / \\   \n",
+          "     O     \n"
+          "    /|\\   \n"
+          "    / \\   \n" ,
+          "    O     \n"
+          "    /|\\   \n"
+          "    / \\   \n" ,
+          "     O     \n"
+          "    /|\\   \n"
+          "    / \\   \n" ,
+          "      O     \n"
+          "    /|\\   \n"
+          "    / \\   \n" ,
+          "     O     \n"
+          "    /|\\   \n"
+          "    / \\   \n" ,
+    };
+    const int NUMBER_OF_FIGURES = sizeof(figure) / sizeof(string);
+    static int currentFigure = 0;
+    return figure[(currentFigure++) % NUMBER_OF_FIGURES];
+}

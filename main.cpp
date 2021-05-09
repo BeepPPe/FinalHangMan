@@ -17,7 +17,7 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-    PlaySound(TEXT("bg.wav"), NULL, SND_FILENAME | SND_ASYNC);
+    //PlaySound(TEXT("bg.wav"), NULL, SND_FILENAME | SND_ASYNC);
     srand(time(0));
     ShowMenu();
     return 0;

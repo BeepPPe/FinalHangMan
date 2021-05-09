@@ -184,9 +184,6 @@ int ChooseIndex(const string& fileName)
 //Main game
 void Game()
 {
-
-
-
     int FPS = 3;
     int timePerFrame = 1000/FPS;
 
